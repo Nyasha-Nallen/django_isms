@@ -32,7 +32,11 @@ def login_view(request):
             if user is not None:
                 login(request, user)
                 messages.success(request, f"Welcome back, {user.username}!")
-                return redirect("dashboard")
+                #User Role Based Redirection
+                if user.user_role == 'ADMIN':
+                    return redirect("admin_dashboard")
+                elif user.user_role == 'STAFF':
+                    return redirect("staff_dashboard")
             else:
                 messages.error(request, "Invalid username or password")
     else:
