@@ -1,0 +1,36 @@
+{% extends 'partials/base.html' %}
+{% block title %} Categories {% endblock title %}
+
+{% block content %}
+    <h2>All Categories</h2> <hr>
+    <a class="btn btn-sm btn-primary" href="{% url 'category_create' %}">+ Create Category</a>
+    <div>
+        <table class="table table-striped mt-3">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for cat in categories %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ cat.name }}</td>
+                        <td>{{ cat.description }}</td>
+                        <td>
+                            <a class="btn btn-warning" href="{% url 'category_update' cat.pk %}">Edit</a>
+                            <a class="btn btn-danger" href="{% url 'category_delete' cat.pk %}">Delete</a>
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="4">No Categories Yet, Create New Categories</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock content %}

@@ -1,0 +1,26 @@
+{% extends 'partials/base.html' %}
+{% block title %} Categories {% endblock title %}
+
+{% block content %}
+    <h2>
+        {% if category %}
+            Update Category : {{ category.name }}
+        {% else %}
+            Create New Category Here
+        {% endif %}
+    </h2> <hr>
+    <a class="btn btn-sm btn-primary" href="{% url 'category_list' %}">View All Category</a>
+    <div class="m-3">
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <input type="submit" value="Save" class="form-control btn btn-success">
+                </form>
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+    </div>
+{% endblock content %}

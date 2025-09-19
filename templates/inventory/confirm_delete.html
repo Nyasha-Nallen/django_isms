@@ -1,0 +1,21 @@
+{% extends 'partials/base.html' %}
+
+{% block title %} Delete {{ type }} {% endblock title %}
+
+{% block content %}
+    <h2>Delete {{ type}}: {{ item.name }}</h2>
+    <div>
+        {% for message in messages %}
+            <p>{{ message }}</p>
+        {% endfor %}
+    </div>
+    <form method="POST">
+        {% csrf_token %}
+        <p>Are you sure you want to delete {{ type }} {{ item.name }}?</p> <hr>
+        
+        <a class="btn btn-primary" href="{% url 'category_list' %}">Cancel</a>
+        <input type="submit" value="Delete" class="btn btn-danger">
+    </form>
+        
+    
+{% endblock content %}
