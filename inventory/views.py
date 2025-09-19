@@ -67,3 +67,66 @@ def category_delete(request, pk):
         'type': 'Category'
     }
     return render(request, 'inventory/confirm_delete.html', context)
+
+
+#==========================
+# PRODUCT CRUD VIEWS
+#==========================
+@login_required
+@admin_required
+def product_list(request):
+    products = Product.objects.all()
+    context = {
+        'products': products,
+    }
+    return render(request, 'inventory/product_list.html', context)
+
+@login_required
+@admin_required
+def product_create(request):
+    if request.method == 'POST':
+        form = ProductForm(request.POST)
+        if form.is_valid():
+            product = form.save(commit=False)
+            product.created_by = request.user
+            product.save()
+            messages.success(request, "Product created successfully")
+            return redirect('product_list')
+    else:
+        form = ProductForm()
+    context = {
+        'form':form,
+    }
+    return render(request, 'inventory/product_form.html', context)
+
+@login_required
+@admin_required
+def product_update(request, pk):
+    product = get_object_or_404(Product, pk=pk)
+    if request.method == 'POST':
+        form = ProductForm(request.POST, instance=product)
+        if form.is_valid():
+            prod = form.save()
+            messages.success(request, 'Product updated successfully')
+            return redirect('product_list')
+    else:
+        form = ProductForm(instance=product)
+    context = {
+        'form': form,
+        'product': product
+    }
+    return render(request, 'inventory/product_form.html', context)
+
+@login_required
+@admin_required
+def product_delete(request, pk):
+    item = get_object_or_404(Product, pk=pk)
+    if request.method == 'POST':
+        item.delete()
+        messages.success(request, 'Product deleted successfully')
+        return redirect('product_list')
+    context = {
+        'item': item,
+        'type': 'Product'
+    }
+    return render(request, 'inventory/confirm_delete.html', context)

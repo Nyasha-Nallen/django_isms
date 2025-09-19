@@ -4,7 +4,7 @@
 <p>Welcome, {{ user.username }}! You are logged in as <strong>{{ user.get_user_role_display }}</strong>.</p>
 <ul>
   <li><a href="{% url 'category_list' %}">Manage Categories</a></li>
-  <li><a href="#">Manage Sales</a></li>
+  <li><a href="{% url 'product_list' %}">Manage Products</a></li>
   <li><a href="#">Manage Users</a></li>
   <li><a href="#">View Reports</a></li>
 </ul>
