@@ -1,0 +1,6 @@
+{% extends "partials/base.html" %}
+{% block content %}
+<h2>Welcome, {{ user.username }}!</h2>
+<p>Your role: {{ user.get_user_role_display }}</p>
+<a href="{% url 'logout' %}" class="btn btn-danger">Logout</a>
+{% endblock %}
