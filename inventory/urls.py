@@ -14,4 +14,10 @@ urlpatterns = [
     path('product/list/', views. product_list, name='product_list'),
     path('product/edit/<int:pk>/', views.product_update, name='product_update'),
     path('product/delete/<int:pk>', views.product_delete, name='product_delete'),
+
+    #RECEIVE NEW STOCK URLS
+    path("stock/receipt/", views.stock_receipt_create, name="stock_receipt_create"),
+    
+    #MAKE A SALE 
+    path("sales/transaction/", views.sale_transaction_create, name="sale_transaction_create"),
 ]
